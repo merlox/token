@@ -98,22 +98,28 @@ library SafeMath {
  * all accounts just by listening to said events. Note that this isn't required by the specification, and other
  * compliant implementations may not do it.
  */
-contract ERC20 is IERC20 {
+contract Token is IERC20 {
     using SafeMath for uint256;
 
     mapping (address => uint256) private _balances;
     mapping (address => mapping (address => uint256)) private _allowed;
-    uint256 private _totalSupply;
-    string public name;
-    string public symbol;
-    uint256 public decimals;
+    address public owner;
+    uint256 private _totalSupply = 100e24;
+    string public name = 'Token';
+    string public symbol = 'TKN';
+    uint256 public decimals = 18;
 
-    constructor (string memory _name, string memory _symbol, uint256 __totalSupply, uint256 _decimals) public {
+    modifier onlyOwner {
+        require(msg.sender == owner, 'This function can only be executed by the owner');
+        _;
+    }
+
+    constructor () public {
         _balances[msg.sender] = _totalSupply;
+    }
+
+    function changeTokenName(string memory _name) public onlyOwner {
         name = _name;
-        symbol = _symbol;
-        _totalSupply = __totalSupply;
-        decimals = _decimals;
     }
 
     /**
@@ -280,8 +286,3 @@ contract ERC20 is IERC20 {
         _approve(account, msg.sender, _allowed[account][msg.sender].sub(value));
     }
 }
-
-contract Token is ERC20 {
-    constructor() public ERC20() {}
-}
-constructor (string memory _name, string memory _symbol, uint256 __totalSupply, uint256 _decimals) public {
