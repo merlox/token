@@ -98,16 +98,16 @@ library SafeMath {
  * all accounts just by listening to said events. Note that this isn't required by the specification, and other
  * compliant implementations may not do it.
  */
-contract Token is IERC20 {
+contract HPT is IERC20 {
     using SafeMath for uint256;
 
     mapping (address => uint256) private _balances;
     mapping (address => mapping (address => uint256)) private _allowed;
     address public owner;
-    uint256 private _totalSupply = 100e24;
-    string public name = 'Token';
-    string public symbol = 'TKN';
-    uint256 public decimals = 18;
+    uint256 private _totalSupply = 1e6 * 1e8; // 1 million tokens with 8 decimals
+    string public name = 'HPT';
+    string public symbol = 'HPT';
+    uint256 public decimals = 8;
 
     modifier onlyOwner {
         require(msg.sender == owner, 'This function can only be executed by the owner');
