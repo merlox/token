@@ -98,15 +98,15 @@ library SafeMath {
  * all accounts just by listening to said events. Note that this isn't required by the specification, and other
  * compliant implementations may not do it.
  */
-contract QKD is IERC20 {
+contract IO is IERC20 {
     using SafeMath for uint256;
 
     mapping (address => uint256) private _balances;
     mapping (address => mapping (address => uint256)) private _allowed;
     address public owner;
     uint256 private _totalSupply = 1e8 * 1e8; // 100 million tokens with 8 decimals
-    string public name = 'QKD';
-    string public symbol = 'QKD';
+    string public name = 'IO';
+    string public symbol = 'IO';
     uint256 public decimals = 8;
 
     modifier onlyOwner {
